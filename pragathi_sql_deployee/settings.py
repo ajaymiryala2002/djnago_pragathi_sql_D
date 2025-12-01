@@ -82,9 +82,11 @@ WSGI_APPLICATION = 'pragathi_sql_deployee.wsgi.application'
 # }
 
 
-import os 
+import os
 
-DATABASES = {
+if os.environ.get("RENDER"):
+    # Production (Render + Railway MySQL)
+    DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": os.environ.get("MYSQLDATABASE"),
